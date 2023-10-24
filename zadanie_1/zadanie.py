@@ -89,8 +89,11 @@ def main():
    
 
 
-    plt.show()
+    
+    plt.tight_layout()
     plt.savefig('myplot.pdf')
+  
+    plt.close()
     
 
    
