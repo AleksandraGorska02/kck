@@ -3,6 +3,7 @@
 
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 def main():
     dane1 = pd.read_csv("zadanie_1/1c.csv")
@@ -18,7 +19,7 @@ def main():
     ost5 = dane5[dane5.columns.difference(["effort", "generation"])].iloc[-1]
 
 
-    boxdane = [ost1, ost2, ost3, ost4, ost5]
+    boxdane = [ost3, ost2, ost5, ost1, ost4]
 
   
     dane1["avg"] = dane1[dane1.columns.difference(["effort", "generation"])].mean(axis=1)
@@ -30,7 +31,8 @@ def main():
    
     
     
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(8, 6))
+    # Pierwszy wykres 
     plt.subplot(1, 2, 1)
 
     plt.plot(dane3["effort"], dane3["avg"], color='blue', label='1-Evol-RS',marker='o', markevery=25,markeredgecolor='black')
@@ -60,8 +62,24 @@ def main():
 
     # Drugi wykres
     plt.subplot(1, 2, 2)
+    whiskerprops = dict(linestyle='--', linewidth=1.5, color='blue')
+    flierprops = dict(marker='+', markersize=7, markeredgecolor='blue')
+    medianprops = dict( linewidth=1.5, color='red')
+    boxprops = dict(linewidth=1.5, color='blue')
+    plt.boxplot(boxdane,flierprops=flierprops ,whiskerprops=whiskerprops,notch=True,medianprops=medianprops,boxprops=boxprops)
 
-    plt.boxplot(boxdane)
+    plt.margins(x=0, y=0)
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.ylim(0.6, 1)
+    plt.yticks([0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9,0.95 ,1],[])
+    plt.xticks([1, 2, 3, 4, 5],["1-Evol-RS", "1-Coev-RS", "2-Coev-RS", "1-Coev", "2-Coev"], rotation=20)
+    ay2 = plt.twinx()
+    ay2.set_yticks([0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9,0.95 ,1],["60", "65", "70", "75", "80", "85", "90", "95", "100"])
+    ay2.set_ylim(0.6, 1)
+    mean_values = [np.mean(data) for data in boxdane]
+    for i, mean_value in enumerate(mean_values):
+        plt.plot(i + 1, mean_value, 'ro', label=f'Średnia {i + 1}', markersize=5, markeredgecolor='black', markerfacecolor='blue')
+
    
 
 
