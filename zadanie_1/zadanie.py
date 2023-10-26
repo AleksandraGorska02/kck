@@ -4,7 +4,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-
+#Aleksandra Górska nr indrksu 151845
 def main():
     dane1 = pd.read_csv("zadanie_1/1c.csv")
     dane2 = pd.read_csv("zadanie_1/1crs.csv")

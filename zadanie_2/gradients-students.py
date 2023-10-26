@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#przy zadaniu na 100% nie wolno uzyc cmap!!!
 from __future__ import division             # Division in Python 2.7
 import matplotlib
 matplotlib.use('Agg')                       # So that we can render files without GUI
 import matplotlib.pyplot as plt
 from matplotlib import rc
 import numpy as np
+import colorsys
+
 
 from matplotlib import colors
 
@@ -46,27 +49,62 @@ def hsv2rgb(h, s, v):
 
 def gradient_rgb_bw(v):
     #TODO
-    return (0, 0, 0)
+    return (v, v, v)
 
 
 def gradient_rgb_gbr(v):
     #TODO
-    return (1, 1, 1)
+    if v < 0.5:
+        return (0, 1-2*v, 2*v)
+    else:
+        v=v-0.5
+        return (2*v, 0, 1-2*v)
+
+    
 
 
 def gradient_rgb_gbr_full(v):
-    #TODO
-    return (0, 0, 0)
-
+    if v < 0.25:
+        return (0, 1, 4*v)
+    elif v < 0.5:
+        v=v-0.25
+        return (0, 1-4*v, 1)
+    elif v < 0.75:
+        v=v-0.5
+        return (4*v, 0, 1)
+    else:
+        v=v-0.75
+        return (1, 0, 1-4*v)
+    
 
 def gradient_rgb_wb_custom(v):
-    #TODO
-    return (0, 0, 0)
+    
+    if v < 1/7:
+        return (1, 1-7*v, 1)
+    elif v < 2/7:
+        v=v-1/7
+        return (1-7*v, 0, 1)
+    elif v < 3/7:
+        v=v-2/7
+        return (0, 7*v, 1)
+    elif v < 4/7:
+        v=v-3/7
+        return (0, 1, 1-7*v)
+    elif v < 5/7:
+        v=v-4/7
+        return (7*v, 1, 0)
+    elif v < 6/7:
+        v=v-5/7
+        return (1, 1-7*v, 0)
+    else:
+        v=v-6/7
+        return (1-7*v, 0, 0)
 
 
 def gradient_hsv_bw(v):
     #TODO
-    return hsv2rgb(0, 0, 0)
+    #color sys hsv_to_rgb
+    return colorsys.hsv_to_rgb(0, 0, 0)
 
 
 def gradient_hsv_gbr(v):
