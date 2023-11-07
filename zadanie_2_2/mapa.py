@@ -15,11 +15,29 @@ def main():
 
    
     lines = lines[1:]
-    
-#Używając wybranego gradientu wyświetl wczytany teren
+    lines = np.array(lines)
+    print(lines[0][1])
+    #coppy lines
+    lines2=lines.copy()
+    #increase values by 10% if value is greather than the previous one
+    for i in range(0,len(lines)):
+        for j in range(1,len(lines[i])):
+            if lines2[i][j]>lines2[i][j-1]:
+                lines[i][j]=lines[i][j]*1.1
+            else:
+                lines[i][j]=lines[i][j]*0.9
+
+
+    #decrease values by 10% if value is smaller than the previous one
+    print(lines[0][1])
+    #uzywajac wybranego gradientu wyswietl podany teren
+     #Dodaj więc cieniowanie, tak aby nadać rysunkowi głębi. Zacznij od najprostszej metody: pojaśniaj lub pociemniaj piksel w zależności od tego, czy jego lewy sąsiad jest wyżej czy niżej na mapie
     plt.imshow(lines, cmap='terrain')
+    plt.colorbar()
     plt.show()
- 
+
+
+
    
 
 if __name__ == '__main__':
