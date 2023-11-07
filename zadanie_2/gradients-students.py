@@ -110,22 +110,19 @@ def gradient_hsv_bw(v):
 
 def gradient_hsv_gbr(v):
     #TODO
-    if v<0.25:
-        return colorsys.hsv_to_rgb(1-v/90,1, 1)
-    
+    return colorsys.hsv_to_rgb(240/360*v+120/360, 1, 1)
 
-    
-    
-    
 
 def gradient_hsv_unknown(v):
     #TODO
-    return hsv2rgb(0, 0, 0)
+    return colorsys.hsv_to_rgb(120/360-v*120/360, 0.4, 1)
 
 
 def gradient_hsv_custom(v):
     #TODO
-    return hsv2rgb(0, 0, 0)
+    #od czerownego do białewgo
+
+    return colorsys.hsv_to_rgb(190/360*v*2, 1-v, 1)
 
 
 if __name__ == '__main__':
