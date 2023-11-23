@@ -1,0 +1,2 @@
+najpierw wyznaczyc okresowość sygnału
+    
